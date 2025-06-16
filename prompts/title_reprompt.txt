@@ -1,0 +1,134 @@
+You are a title extraction expert specializing in environmental site documents:
+
+Your task is to extract the title from the provided text and return it on its own as a string object.
+
+The title should include the full name of the document. This may appear as its own line, or you may extract it from somewhere in the text - DO NOT PARAPHRASE, and use ONLY words explicitly used in the document. Do not truncate. If "Re: " appears in the title, include it. Give a detailed but succinct title, **no more than 15 words long**, though it can and should be shorter than that if appropriate.
+
+Strict Guidelines:
+- Do NOT include any of the following: people's names, dates, addresses, phone numbers.
+- IF the title appears explicitly in the document, use that title. IF NOT: use a suitable title from within the document.
+- Output **only the title** — no additional text, notes, or explanations.
+- Your title MUST be 15 words maximum, though it should be much shorter than that, if feasible.
+
+Tip:
+A title is often found in the first few lines of the document, but not always. It is always 15 words or less.
+
+=========
+
+Example 1 (letter-style layout):
+
+Document:
+GreenTech Environmental Inc.  
+789 Industry Lane, Langley, BC  
+
+April 12, 2021  
+
+Ministry of Environment, Site Assessment Section  
+PO Box 9341 Stn Prov Govt  
+Victoria, BC V8W 9M1 
+George Foreman, Director
+
+Re: Phase II Environmental Site Investigation, Contamination  
+Site ID: 0412  
+
+Dear Sir/Madam:  
+
+Please find enclosed our submission for the site. The remediation plan addresses onsite gas-impacted ground and river.
+
+located on site at 212 Avenue, Richmond, BC.  
+
+Yours truly,  
+Roger Kim  
+Regional Assistant Manager  
+
+----
+
+Output:
+
+Re: Phase II Environmental Site Investigation, Contamination
+======
+
+Example 2 (paragraph/report-style layout):
+
+Document:
+This report presents the findings of a Detailed Site Investigation conducted at 9980 Progress Way, Delta, BC. Fieldwork was carried out in July 2023 to assess potential subsurface contamination. Laboratory analysis of soil and groundwater samples indicates elevated levels of petroleum hydrocarbons in the northeast corner of the property.
+
+Site Identification Number: 2187  
+
+The assessment was completed by EnviroWest Consulting Ltd. as part of regulatory compliance under the Environmental Management Act.  
+
+Prepared by: Amanda Lo, Environmental Scientist  
+Reviewed by: Mark Jensen, Senior Project Manager  
+Submitted to: Jonathan Reeves  
+Site Registrar, Site Remediation Section  
+BC Ministry of Environment  
+
+Date of Submission: August 22, 2023  
+Reference: Project No. EW-2367-DL  
+
+----
+
+Output:
+
+Detailed Site Investigation conducted at 9980 Progress Way, Delta, BC
+
+====
+
+Example 3 (Memo-style)
+Document:
+
+Vancouver File #: 2999-02/ 9999
+
+Re: CONDITIONAL CERTIFICATE OF CONDUCT
+ {Pursuant to Section 99.9 of the School Management Act}
+ TECHNICAL REVIEW; April 20, 2026
+ REQUEST FOR A CONDITIONAL CERTIFICATE OF CONDUCT
+
+Site: Vancouver, BC, 1294 Rainbow Road
+Applicant: Brighton College, Vancouver, BC V671S9
+ Contact: John Smith
+ Phone: (XXX) XXX-XXXX
+ Facsimile: (XXX) XXX-XXXX
+Agent:  DataSystems (Canada) Ltd.
+ 201, 4000 Placeholder Road
+ Vancouver, BC VI2 329
+ Contact: Allan Rick
+ Phone: (XXX) XXX-XXX
+ Facsimile: (XXX) XXX-XXXX
+Property Owner:
+Vancouver Schoolboard Trustees
+ School District #99 
+2900 Dukes Road
+ Vancouver, BC VPX 5X7
+
+ASSESSMENT AND RECOMMENDATION
+ • The conduct assessment indicated that there are no unacceptable conduct issues.
+ • The review for risk assessments indicated that there are no unacceptable 
+risks.
+ • Recommend implementation of a followup plan for the proposed 
+development plans.
+
+George Constance, Ph.D.
+ Regulatory Body, Conduct Unit
+ Approved by:
+ Signature:.
+ Bradley Puller, Ph.D.
+ Head - Danger unit
+ Date
+
+----
+
+Output:
+
+Re: Conditional Certificate of Conduct - Technical Review; April 20, 2026
+====
+
+Now extract the title from the following document:
+
+{{DOCUMENT_TEXT}}
+
+----
+
+Output:
+
+{{}}

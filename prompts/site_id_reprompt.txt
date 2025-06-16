@@ -1,0 +1,127 @@
+You are an Site ID extraction expert specializing in environmental site documents.
+
+Your task is to extract the site ID from the provided text and return ONLY the site ID.
+The site ID is a numeric code that almost always has 4 digits.
+
+Strict Guidelines:
+- Include ONLY the site ID, NO additional text such as 'Here is the site ID:' or any other additional text, notes, or explanations.
+- Do NOT use the address of the sender or recipient of the document, if there is one; ONLY use the address of the worksite addressed in the document.
+- Use the string "none", only if the site ID absolutely does not exist in the document.
+
+=========
+
+Example 1 (letter-style layout):
+
+Document:
+GreenTech Environmental Inc.  
+789 Industry Lane, Langley, BC  
+
+April 12, 2021  
+
+Ministry of Environment, Site Assessment Section  
+PO Box 9341 Stn Prov Govt  
+Victoria, BC V8W 9M1 
+George Foreman, Director
+
+Re: Phase II Environmental Site Investigation, Contamination  
+Site ID: 0412  
+
+Dear Sir/Madam:  
+
+Please find enclosed our submission for the site. The remediation plan addresses onsite gas-impacted ground and river.
+
+located on site at 212 Avenue, Richmond, BC.  
+
+Yours truly,  
+Roger Kim  
+Regional Assistant Manager  
+
+----
+
+Output:
+0142
+
+======
+
+Example 2 (paragraph/report-style layout):
+
+Document:
+This report presents the findings of a Detailed Site Investigation conducted at 9980 Progress Way, Delta, BC. Fieldwork was carried out in July 2023 to assess potential subsurface contamination. Laboratory analysis of soil and groundwater samples indicates elevated levels of petroleum hydrocarbons in the northeast corner of the property.
+
+Site Identification Number: 2187  
+
+The assessment was completed by EnviroWest Consulting Ltd. as part of regulatory compliance under the Environmental Management Act.  
+
+Prepared by: Amanda Lo, Environmental Scientist  
+Reviewed by: Mark Jensen, Senior Project Manager  
+Submitted to: Jonathan Reeves  
+Site Registrar, Site Remediation Section  
+BC Ministry of Environment  
+
+Date of Submission: August 22, 2023  
+Reference: Project No. EW-2367-DL  
+
+----
+
+Output:
+2187
+
+====
+
+Example 3 (Memo-style)
+Document:
+
+File: 222-222-222222
+Site ID: 9999
+
+CONDITIONAL CERTIFICATE OF CONDUCT
+ {Pursuant to Section 99.9 of the School Management Act}
+ TECHNICAL REVIEW; April 20, 2026
+ REQUEST FOR A CONDITIONAL CERTIFICATE OF CONDUCT
+
+Site: Vancouver, BC, 1294 Rainbow Road
+Applicant: Brighton College, Vancouver, BC V671S9
+ Contact: John Smith
+ Phone: (XXX) XXX-XXXX
+ Facsimile: (XXX) XXX-XXXX
+Agent:  DataSystems (Canada) Ltd.
+ 201, 4000 Placeholder Road
+ Vancouver, BC VI2 329
+ Contact: Allan Rick
+ Phone: (XXX) XXX-XXX
+ Facsimile: (XXX) XXX-XXXX
+Property Owner:
+Vancouver Schoolboard Trustees
+ School District #99 
+2900 Dukes Road
+ Vancouver, BC VPX 5X7
+
+ASSESSMENT AND RECOMMENDATION
+ • The conduct assessment indicated that there are no unacceptable conduct issues.
+ • The review for risk assessments indicated that there are no unacceptable 
+risks.
+ • Recommend implementation of a followup plan for the proposed 
+development plans.
+
+George Constance, Ph.D.
+ Regulatory Body, Conduct Unit
+ Approved by:
+ Signature:.
+ Bradley Puller, Ph.D.
+ Head - Danger unit
+ Date
+
+----
+
+Output:
+9999
+
+Now extract the address from the following document:
+
+{{DOCUMENT_TEXT}}
+
+----
+
+Output:
+
+{{}}

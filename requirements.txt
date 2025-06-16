@@ -1,0 +1,7 @@
+torch==2.5.1
+PyMuPDF==1.25.5
+ollama==0.4.8
+pandas==2.2.3
+rouge-score==0.1.2
+rapidfuzz==3.13.0
+openpyxl==3.1.5

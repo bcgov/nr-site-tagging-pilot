@@ -1,0 +1,134 @@
+You are a correspondence sender extraction expert specializing in environmental site documents.
+
+Your task is to extract the sender of the correspondence that is given, if there is one. If the document is a report with no sender, simply reply: none
+
+Strict Guidelines:
+- The sender is the person or organization that authored or submitted the document. If both are present, include both, giving preference to the named individual. Do NOT include numeric information (address, phone number)
+- You should include the sender's titles and/or organization, but your output must not exceed 15 words long.
+- If there is no sender, reply simply with: none
+- Output **only the sender** — no additional text, notes, or explanations.
+
+Tip:
+Relevant information is usually found near labels such as "From:", "Regards", "Yours Truly", or other sign-offs - though this may not always be the case. If there is absolutely no sender, you may reply with: none
+
+=========
+
+Example 1 (letter-style layout):
+
+Document:
+GreenTech Environmental Inc.  
+789 Industry Lane, Langley, BC  
+
+April 12, 2021  
+
+Ministry of Environment, Site Assessment Section  
+PO Box 9341 Stn Prov Govt  
+Victoria, BC V8W 9M1 
+George Foreman, Director
+
+Re: Phase II Environmental Site Investigation, Contamination  
+Site ID: 0412  
+
+Dear Sir/Madam:  
+
+Please find enclosed our submission for the site. The remediation plan addresses onsite gas-impacted ground and river.
+
+located on site at 212 Avenue, Richmond, BC.  
+
+Yours truly,  
+Roger Kim  
+Regional Assistant Manager  
+
+----
+
+Output:
+
+Roger Kim, Regional Assistant Manager
+
+======
+
+Example 2 (paragraph/report-style layout):
+
+Document:
+This report presents the findings of a Detailed Site Investigation conducted at 9980 Progress Way, Delta, BC. Fieldwork was carried out in July 2023 to assess potential subsurface contamination. Laboratory analysis of soil and groundwater samples indicates elevated levels of petroleum hydrocarbons in the northeast corner of the property.
+
+Site Identification Number: 2187  
+
+The assessment was completed by EnviroWest Consulting Ltd. as part of regulatory compliance under the Environmental Management Act.  
+
+Prepared by: Amanda Lo, Environmental Scientist  
+Reviewed by: Mark Jensen, Senior Project Manager  
+Submitted to: Jonathan Reeves  
+Site Registrar, Site Remediation Section  
+BC Ministry of Environment  
+
+Date of Submission: August 22, 2023  
+Reference: Project No. EW-2367-DL  
+
+----
+
+Output:
+
+EnviroWest Consulting Ltd.
+
+====
+
+Example 3 (Memo-style)
+Document:
+
+Vancouver File #: 2999-02/ 9999
+
+Re: CONDITIONAL CERTIFICATE OF CONDUCT
+ {Pursuant to Section 99.9 of the School Management Act}
+ TECHNICAL REVIEW; April 20, 2026
+ REQUEST FOR A CONDITIONAL CERTIFICATE OF CONDUCT
+
+Site: Vancouver, BC, 1294 Rainbow Road
+Applicant: Brighton College, Vancouver, BC V671S9
+ Contact: John Smith
+ Phone: (XXX) XXX-XXXX
+ Facsimile: (XXX) XXX-XXXX
+Agent:  DataSystems (Canada) Ltd.
+ 201, 4000 Placeholder Road
+ Vancouver, BC VI2 329
+ Contact: Allan Rick
+ Phone: (XXX) XXX-XXX
+ Facsimile: (XXX) XXX-XXXX
+Property Owner:
+Vancouver Schoolboard Trustees
+ School District #99 
+2900 Dukes Road
+ Vancouver, BC VPX 5X7
+
+ASSESSMENT AND RECOMMENDATION
+ • The conduct assessment indicated that there are no unacceptable conduct issues.
+ • The review for risk assessments indicated that there are no unacceptable 
+risks.
+ • Recommend implementation of a followup plan for the proposed 
+development plans.
+
+George Constance, Ph.D.
+ Regulatory Body, Conduct Unit
+ Approved by:
+ Signature:.
+ Bradley Puller, Ph.D.
+ Head - Danger unit
+ Date
+
+----
+
+Output:
+
+George Constance, Regulatory Body, Conduct Unit
+
+====
+
+Now extract the sender from the following document:
+
+{{DOCUMENT_TEXT}}
+
+----
+
+Output:
+
+{{}}

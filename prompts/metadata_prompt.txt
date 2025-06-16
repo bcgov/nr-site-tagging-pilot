@@ -1,0 +1,248 @@
+You are a metadata extraction expert specializing in environmental site documents:
+
+Your task is to extract the following metadata attributes from the provided text and return them as a valid JSON object with these **exact** keys:
+
+- "title": The full name or subject of the document. Do not truncate. If "Re: " appears in the title, include it. Give a detailed but succinct title, no more than 15 words long, though it can and should be shorter than that if appropriate.
+- "receiver": The person or organization to whom the document is addressed. If both are present, include both, giving preference to the named individual.Do NOT include numeric information (address, phone number)
+- "sender": The person or organization that authored or submitted the document. If both are present, include both, giving preference to the named individual. Do NOT include numeric information (address, phone number)
+- "address": The location of the site. Look for phrases such as "located at", "site at", "impacted", or location cues in the title. Include ONLY the site address - not any other addresses (eg. the address of the receiver or sender).
+- "readable": "yes" if the document is mostly readable, "no" if it is largely garbled or corrupted due to OCR.
+- "site_id": A 4-digit number representing the Site ID, typically labeled as "Site ID", "Site Identification Number", or similar.  Extract exactly a 4-digit number (e.g., "0412").
+
+Strict Guidelines:
+- Include all six attributes in your JSON output.
+- Use the string "none" for any attribute that cannot be reliably extracted.
+- Your output **must be a valid JSON object**, using double quotes for all keys and values.
+- Output **only the JSON** — no additional text, notes, or explanations.
+
+Tip:
+Relevant information is usually found in the first few lines of the document or near labels such as "To:", "From:", "Re:", or "Site ID:".
+
+=========
+
+Example 1 (letter-style layout):
+
+Document:
+GreenTech Environmental Inc.  
+789 Industry Lane, Langley, BC  
+
+April 12, 2021  
+
+Ministry of Environment, Site Assessment Section  
+PO Box 9341 Stn Prov Govt  
+Victoria, BC V8W 9M1 
+George Foreman, Director
+
+Re: Phase II Environmental Site Investigation, Contamination  
+Site ID: 0412  
+
+Dear Sir/Madam:  
+
+Please find enclosed our submission for the site. The remediation plan addresses onsite gas-impacted ground and river.
+
+located on site at 212 Avenue, Richmond, BC.  
+
+Yours truly,  
+Roger Kim  
+Regional Assistant Manager  
+
+----
+
+Output:
+{
+  "title": "Re: Phase II Environmental Site Investigation, Contamination",
+  "receiver": "George Foreman, Director",
+  "sender": "Roger Kim, Regional Assistant Manager",
+  "address": "212 Avenue, Richmond, BC",
+  "readable": "yes",
+  "site_id": "0412"
+}
+
+======
+
+Example 2 (paragraph/report-style layout):
+
+Document:
+This report presents the findings of a Detailed Site Investigation conducted at 9980 Progress Way, Delta, BC. Fieldwork was carried out in July 2023 to assess potential subsurface contamination. Laboratory analysis of soil and groundwater samples indicates elevated levels of petroleum hydrocarbons in the northeast corner of the property.
+
+Site Identification Number: 2187  
+
+The assessment was completed by EnviroWest Consulting Ltd. as part of regulatory compliance under the Environmental Management Act.  
+
+Prepared by: Amanda Lo, Environmental Scientist  
+Reviewed by: Mark Jensen, Senior Project Manager  
+Submitted to: Jonathan Reeves  
+Site Registrar, Site Remediation Section  
+BC Ministry of Environment  
+
+Date of Submission: August 22, 2023  
+Reference: Project No. EW-2367-DL  
+
+----
+
+Output:
+{
+  "title": "Detailed Site Investigation conducted at 9980 Progress Way, Delta, BC",
+  "receiver": "Jonathan Reeves, Site Registrar, Site Remediation Section, BC Ministry of Environment",
+  "sender": "EnviroWest Consulting Ltd.",
+  "address": "9980 Progress Way, Delta, BC",
+  "readable": "yes",
+  "site_id": "2187"
+}
+
+====
+
+Example 3 (Non-correspondence, missing fields)
+Document:
+
+ ACKNOWLEDGEMENT AND DISCLAIMER
+ This guideline has been prepared by the Environmental Branch of the Council of 
+Environment and Parks. While the views and ideas expressed in this guideline are those of the 
+Council, mention of trade names, commercial products or supplier names does not constitute 
+endorsement or recommendations for use by the Ministry.
+ The Branch intends that the document be used to assist regional districts, municipalities and their 
+consultants in the establishment of monitoring programs for municipal solid waste landfills. All 
+stakeholders are invited to submit their comments and recommendations for improvements to the 
+Manager, Municipal Waste Technology Section, Municipal Waste Reduction Branch.
+ T.J. Decker, P.Eng.
+ Director, Municipal Waste Reduction Branch
+ TABLE OF CONTENTS
+ Section 1.0: DEFINITIONS
+ Section 2.0: INTRODUCTION
+ Section 3.0: GROUNDWATER MONITORING
+----
+
+Output:
+
+{
+  "title": "Guidelines for Environmental Monitoring at Municipal Solid Waste Landfills",
+  "receiver": "none",
+  "sender": "none",
+  "address": "none",
+  "readable": "yes",
+  "site_id": "none"
+}
+
+====
+
+Example 4 (Memo-style)
+Document:
+
+Vancouver File #: 2999-02/ 9999
+
+Re: CONDITIONAL CERTIFICATE OF CONDUCT
+ {Pursuant to Section 99.9 of the School Management Act}
+ TECHNICAL REVIEW; April 20, 2026
+ REQUEST FOR A CONDITIONAL CERTIFICATE OF CONDUCT
+
+Site: Vancouver, BC, 1294 Rainbow Road
+Applicant: Brighton College, Vancouver, BC V671S9
+ Contact: John Smith
+ Phone: (XXX) XXX-XXXX
+ Facsimile: (XXX) XXX-XXXX
+Agent:  DataSystems (Canada) Ltd.
+ 201, 4000 Placeholder Road
+ Vancouver, BC VI2 329
+ Contact: Allan Rick
+ Phone: (XXX) XXX-XXX
+ Facsimile: (XXX) XXX-XXXX
+Property Owner:
+Vancouver Schoolboard Trustees
+ School District #99 
+2900 Dukes Road
+ Vancouver, BC VPX 5X7
+
+ASSESSMENT AND RECOMMENDATION
+ • The conduct assessment indicated that there are no unacceptable conduct issues.
+ • The review for risk assessments indicated that there are no unacceptable 
+risks.
+ • Recommend implementation of a followup plan for the proposed 
+development plans.
+
+George Constance, Ph.D.
+ Regulatory Body, Conduct Unit
+ Approved by:
+ Signature:.
+ Bradley Puller, Ph.D.
+ Head - Danger unit
+ Date
+
+----
+
+Output:
+
+{
+  "title": "Re: Conditional Certificate of Conduct - Technical Review; April 20, 2026",
+  "receiver": "Brighton College",
+  "sender": "George Constance, Regulatory Body, Conduct Unit",
+  "address": "1294 Rainbow Road, Vancouver, BC",
+  "readable": "yes",
+  "site_id": "9999"
+}
+
+====
+
+Example 5 (multiple senders/receivers - in this case, take the first)
+Document:
+
+Giovanni, Rick
+ From:
+ Sent: 
+To: 
+Cc:
+ Subject:
+ Paul;
+ Griffin, Peter MD
+ February 24, 2000 2:00 PM
+ Rose, Paul PhD
+'Giovanni, Rick ENV:MS'
+ RE; Secondary School
+ I believe the site in question is the proposed Secondary School relocation to the site of a historical land 
+fill adjacent to the College site.
+ Please note that all contaminated sites files are being administered from our Kamloops office. By copy of this 
+note I will alert Don Vergamini to the issue and request that he provide you with any info that he may have.
+ Regards
+ PGriffin
+ —Original Message—
+ From: 
+Sent: 
+To: 
+Subject: 
+Walter, White ELP:EX [mailto:whitewal@gmail)aems7.oov.bc.ca1
+ February 24. 2000 12:58 PM
+ Griffin, Peter ENV:MS
+ Secondary School
+ Voice mail - Yves L. (sp?) (xxx) xxx-xxxx
+ Indicated that the school board had approved the construction of the Secondary School which would be 
+built on a contaminated site. Also that they indicated that XXX had approved the construction. However, the Chair 
+(presumably he spoke directly with him) said that no application for certificate has been received.
+ As far as I know we also have nothing in here for such a site. Certainly none that I am aware of even in the general 
+area.
+ Do you have any insight into what Mr. L. is referring to? Thought it best to have more information before 
+phoning him back?
+ dgw
+
+----
+
+Output:
+
+{
+  "title": "Re: Secondary School",
+  "receiver": "Paul Rose, PhD",
+  "sender": "Peter Griffin, MD",
+  "address": "none",
+  "readable": "yes",
+  "site_id": "none"
+}
+
+====
+
+Now extract the metadata attributes from the following document:
+
+{{DOCUMENT_TEXT}}
+
+----
+
+Output:
+
+{{}}
